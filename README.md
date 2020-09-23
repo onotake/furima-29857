@@ -64,3 +64,7 @@ has_one: address
 
 ### Association
 belongs_to: purchaser
+
+## ER図
+
+![furima-app-er](https://user-images.githubusercontent.com/62535314/93978152-8aa27800-fdb6-11ea-85a2-47c0e2180d24.png)
