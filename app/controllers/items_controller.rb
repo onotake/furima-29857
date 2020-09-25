@@ -4,6 +4,18 @@ class ItemsController < ApplicationController
   def index
   end
 
+  def new
+    
+  end
+
+  def create
+    if @user.save
+      redirect_to controller: :items, action: :index
+    else
+      render "new"
+    end
+  end
+
   private
 
   def move_to_index
