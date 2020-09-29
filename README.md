@@ -29,7 +29,7 @@ has_many: purchasers
 | condition_id     | integer    | null: false                    |
 | delivery_fee_id  | integer    | null: false                    |
 | delivery_area_id | integer    | null: false                    |
-| days_id          | integer    | null: false                    |
+| day_id           | integer    | null: false                    |
 | price            | integer    | null: false                    |
 
 ### Association
