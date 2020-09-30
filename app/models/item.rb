@@ -6,13 +6,13 @@ class Item < ApplicationRecord
   with_options presence: true do
     validates :product_name, length: { maximum: 40 }
     validates :description,  length: { maximum: 1000 }
-    validates :price,        numericality: {greater_than: 300, less_than:9999999}, format: {with: /\A[0-9]+\z/}
+    validates :price,        numericality: { greater_than: 300, less_than: 9_999_999 }, format: { with: /\A[0-9]+\z/ }
   end
 
   validates :image, presence: true, unless: :was_attached?
 
   def was_attached?
-    self.image.attached?
+    image.attached?
   end
 
   extend ActiveHash::Associations::ActiveRecordExtensions
