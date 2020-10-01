@@ -38,25 +38,50 @@ RSpec.describe User, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include("Category can't be blank")
       end
+      it 'category_idが1を選択している場合出品できない' do
+        @item.category_id = '1'
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Category must be other than 1")
+      end
       it '商品の状態が選択されていないと出品できない' do
         @item.condition_id = ''
         @item.valid?
         expect(@item.errors.full_messages).to include("Condition can't be blank")
+      end
+      it 'condition_idが1を選択している場合出品できない' do
+        @item.condition_id = '1'
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Condition must be other than 1")
       end
       it '配送料の負担が選択されていないと出品できない' do
         @item.delivery_fee_id = ''
         @item.valid?
         expect(@item.errors.full_messages).to include("Delivery fee can't be blank")
       end
+      it 'delivery_fee_idが1を選択している場合出品できない' do
+        @item.delivery_fee_id = '1'
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Delivery fee must be other than 1")
+      end
       it '発送元の地域が選択されていないと出品できない' do
         @item.delivery_area_id = ''
         @item.valid?
         expect(@item.errors.full_messages).to include("Delivery area can't be blank")
       end
+      it 'category_idが0を選択している場合出品できない' do
+        @item.delivery_area_id = '0'
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Delivery area must be other than 0")
+      end
       it '発送までの日数が選択されていないと出品できない' do
         @item.day_id = ''
         @item.valid?
         expect(@item.errors.full_messages).to include("Day can't be blank")
+      end
+      it 'day_idが1を選択している場合出品できない' do
+        @item.day_id = '1'
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Day must be other than 1")
       end
       it '価格がないと出品できない' do
         @item.price = ''
@@ -66,7 +91,17 @@ RSpec.describe User, type: :model do
       it '価格が半角数字でないと出品できない' do
         @item.price = '５５５'
         @item.valid?
-        expect(@item.errors.full_messages).to include('Price is not a number')
+        expect(@item.errors.full_messages).to include("Price is not a number")
+      end
+      it '価格が299円以下のときに出品できない'do
+        @item.price = '299'
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price must be greater than 300")
+      end
+      it '価格が10000000円以上のときに出品できない'do
+        @item.price = '10000000'
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price must be less than 9999999")
       end
     end
   end

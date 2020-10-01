@@ -5,7 +5,7 @@ FactoryBot.define do
     category_id      { Faker::Number.within(range: 2..11) }
     condition_id     { Faker::Number.within(range: 2..7) }
     delivery_fee_id  { Faker::Number.within(range: 2..3) }
-    delivery_area_id { Faker::Number.within(range: 1..46) }
+    delivery_area_id { Faker::Number.within(range: 1..47) }
     day_id           { Faker::Number.within(range: 2..4) }
     price            { Faker::Number.within(range: 300..9_999_999) }
 
