@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
 
   def basic_auth
     authenticate_or_request_with_http_basic do |username, password|
-      username ==  ENV["BASIC_AUTH_USER"] && password == ENV["BASIC_AUTH_PASSWORD"]
+      username == ENV['BASIC_AUTH_USER'] && password == ENV['BASIC_AUTH_PASSWORD']
     end
   end
 
@@ -15,8 +15,6 @@ class ApplicationController < ActionController::Base
   end
 
   def move_to_index
-    unless user_signed_in?
-      redirect_to action: :index
-    end
+    redirect_to action: :index unless user_signed_in?
   end
 end

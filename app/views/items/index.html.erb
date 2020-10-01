@@ -127,13 +127,14 @@
     <ul class='item-lists'>
 
       <%# 商品のインスタンス変数になにか入っている場合、中身のすべてを展開できるようにしましょう %>
+      <%# @items.each do |item|%> 
       <li class='list'>
         <%= link_to "#" do %>
         <div class='item-img-content'>
           <%= image_tag "item-sample.png", class: "item-img" %>
 
           <%# 商品が売れていればsold outを表示しましょう %>
-          <div class='sold-out'>
+          <div class="sold-out">
             <span>Sold Out!!</span>
           </div>
           <%# //商品が売れていればsold outを表示しましょう %>
@@ -154,7 +155,7 @@
         <% end %>
       </li>
       <%# //商品のインスタンス変数になにか入っている場合、中身のすべてを展開できるようにしましょう %>
-
+      <%# end %>
       <%# 商品がない場合のダミー %>
       <%# 商品がある場合は表示されないようにしましょう %>
       <li class='list'>
@@ -180,10 +181,10 @@
   </div>
   <%# /商品一覧 %>
 </div>
-<div class='purchase-btn'>
-  <span class='purchase-btn-text'>出品する</span>
-  <a href="#">
+<%= link_to (new_item_path) do %> 
+  <div class='purchase-btn'>
+    <span class='purchase-btn-text'>出品する</span>
     <%= image_tag 'camera.png' , size: '185x50' ,class: "purchase-btn-icon" %>
-  </a>
-</div>
+  </div>
+<% end %>
 <%= render "shared/footer" %>
