@@ -4,14 +4,13 @@ class PurchaserAddress
   attr_accessor :token, :post_code, :municipality, :address, :building_name, :phone_number, :prefecture_id, :user_id, :item_id
 
   with_options presence: true do
-    validates :post_code, format: {with: /\A\d{3}[-]\d{4}\z/}
+    validates :post_code,     format: {with: /\A\d{3}[-]\d{4}\z/}
+    validates :prefecture_id, numericality: { other_than: 0 } 
     validates :municipality
     validates :address
-    validates :building_name
-    validates :phone_number, length: { maximum: 11 }, format: {with: /\A[0-9]+\z/}
+    validates :phone_number,  length: { maximum: 11 }, format: {with: /\A[0-9]+\z/}
     validates :token
   end
-  validates :prefecture_id, presence: true, numericality: { other_than: 0 } 
 
   def save
     purchaser = Purchaser.create(user_id: user_id, item_id: item_id)
