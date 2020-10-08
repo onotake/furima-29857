@@ -1,5 +1,7 @@
 class PurchasersController < ApplicationController
   before_action :authenticate_user!
+  before_action :prevent, only: :index
+  
 
   def index
     @item = Item.find(params[:item_id])
@@ -31,6 +33,13 @@ class PurchasersController < ApplicationController
         card: purchaser_params[:token],
         currency: 'jpy'
       )
+  end
+
+  def prevent 
+    @item = Item.find(params[:item_id])
+    if @item.purchaser.present?
+      redirect_to root_path
+    end
   end
 end
 
