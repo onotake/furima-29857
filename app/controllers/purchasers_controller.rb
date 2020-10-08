@@ -1,15 +1,14 @@
 class PurchasersController < ApplicationController
   before_action :authenticate_user!
   before_action :prevent, only: :index
+  before_action :set_item, only: [:index, :create]
   
 
   def index
-    @item = Item.find(params[:item_id])
     @purchaser = PurchaserAddress.new
   end
 
   def create
-    @item = Item.find(params[:item_id])
     @purchaser = PurchaserAddress.new(purchaser_params)
     if @purchaser.valid?
       pay_item
@@ -35,9 +34,15 @@ class PurchasersController < ApplicationController
       )
   end
 
+  def set_item
+    @item = Item.find(params[:item_id])
+  end
+
   def prevent 
     @item = Item.find(params[:item_id])
     if @item.purchaser.present?
+      redirect_to root_path
+    elsif @item.user == current_user
       redirect_to root_path
     end
   end
