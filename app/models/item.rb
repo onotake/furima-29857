@@ -10,7 +10,6 @@ class Item < ApplicationRecord
   end
 
   validates :image, presence: true, unless: :was_attached?
-
   def was_attached?
     image.attached?
   end
@@ -23,10 +22,10 @@ class Item < ApplicationRecord
   belongs_to_active_hash :day
 
   with_options presence: true do
-    validates :category_id,      numericality: { other_than: 1 }
-    validates :condition_id,     numericality: { other_than: 1 }
-    validates :delivery_fee_id,  numericality: { other_than: 1 }
-    validates :delivery_area_id, numericality: { other_than: 0 }
-    validates :day_id,           numericality: { other_than: 1 }
+    validates :category_id,      numericality: { other_than: 1, message: "を選択してください" }
+    validates :condition_id,     numericality: { other_than: 1, message: "を選択してください"}
+    validates :delivery_fee_id,  numericality: { other_than: 1, message: "を選択してください" }
+    validates :delivery_area_id, numericality: { other_than: 0, message: "を選択してください"}
+    validates :day_id,           numericality: { other_than: 1, message: "を選択してください"}
   end
 end
